@@ -40,6 +40,12 @@ namespace leave_management.Repository
             return leaveHistory;
         }
 
+        public bool isExists(int id)
+        {
+            var exists = _db.LeaveHistories.Any(q => q.Id == id); // any() check if empty record is empty or not
+            return exists;
+        }
+
         public bool Save()
         {
             var changes = _db.SaveChanges();
