@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using leave_management.Data;
 
 namespace leave_management.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210603151108_AddedLeaveTypeAndAllocation")]
+    partial class AddedLeaveTypeAndAllocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +240,10 @@ namespace leave_management.Data.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("LeaveTypeId")
+                    b.Property<string>("LeaveTypeId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LeaveTypeId1")
                         .HasColumnType("int");
 
                     b.Property<int>("NumberOfDays")
@@ -251,7 +256,7 @@ namespace leave_management.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("LeaveTypeId");
+                    b.HasIndex("LeaveTypeId1");
 
                     b.ToTable("LeaveAllocations");
                 });
@@ -329,9 +334,6 @@ namespace leave_management.Data.Migrations
 
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("DefaultDays")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -422,9 +424,7 @@ namespace leave_management.Data.Migrations
 
                     b.HasOne("leave_management.Data.LeaveType", "LeaveType")
                         .WithMany()
-                        .HasForeignKey("LeaveTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LeaveTypeId1");
 
                     b.Navigation("Employee");
 

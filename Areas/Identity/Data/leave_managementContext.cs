@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace leave_management.Data
 {
-    public class leave_managementContext : IdentityDbContext<IdentityUser>
+    public class leave_managementContext : IdentityDbContext<Employee>
     {
         public leave_managementContext(DbContextOptions<leave_managementContext> options)
             : base(options)

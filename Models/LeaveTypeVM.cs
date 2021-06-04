@@ -10,6 +10,10 @@ namespace leave_management.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Required]
+        [Range(1,25,ErrorMessage = "Please enter a valid number")]
+        [Display(Name = "Default Number of Days")]
+        public int DefaultDays { get; set; } //name must be same as data.leavetype for mapping
         [Display(Name="Date Created")]
         public DateTime? DateCreated { get; set; } //is nuablle
     }

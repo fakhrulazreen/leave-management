@@ -1,0 +1,42 @@
+﻿@model leave_management.Models.CreateLeaveAllocationVM
+
+@{
+    ViewData["Title"] = "Leave Allocation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Leave Allocation</h1>
+
+<table id="tblData" class="table table-hover table-striped" width="100%">
+    <thead>
+        <tr>
+            <th>
+                Leave Types
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeaveTypes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
+                        <i class="fa fa-users" aria-hidden="true"></i> Allocate to Employees
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tblData').DataTable();
+        });
+    </script>
+}

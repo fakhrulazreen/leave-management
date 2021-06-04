@@ -1,0 +1,83 @@
+﻿@model leave_management.Models.ViewAllocationVM
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card col-12">
+    <div class="card-body">
+        <h4 class="card-title">Employee Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                First Name
+            </dt>
+            <dd class="col-sm-10">
+                : @Html.DisplayFor(model => model.Employee.FirstName)
+            </dd>
+            <dt class="col-sm-2">
+                Last Name
+            </dt>
+            <dd class="col-sm-10">
+                : @Html.DisplayFor(model => model.Employee.LastName)
+            </dd>
+            <dt class="col-sm-2">
+                Email
+            </dt>
+            <dd class="col-sm-10">
+                : @Html.DisplayFor(model => model.Employee.UserName)
+            </dd>
+            <dt class="col-sm-2">
+                Phone No.
+            </dt>
+            <dd class="col-sm-10">
+                : @Html.DisplayFor(model => model.Employee.PhoneNumber)
+            </dd>
+            <dt class="col-sm-2">
+                Tax Id
+            </dt>
+            <dd class="col-sm-10">
+                : @Html.DisplayFor(model => model.Employee.TaxId)
+            </dd>
+            <dt class="col-sm-2">
+                Date of Birth
+            </dt>
+            <dd class="col-sm-10">
+                : @Html.DisplayFor(model => model.Employee.DateofBirth)
+            </dd>
+            <dt class="col-sm-2">
+                Date of Joined
+            </dt>
+            <dd class="col-sm-10">
+                : @Html.DisplayFor(model => model.Employee.DateJoined)
+            </dd>
+        </dl>
+    </div>
+</div>
+<br />
+<div class="card col-12">
+    <div class="card-body">
+        <h4 class="card-title">Leave Allocations</h4>
+        <hr />
+        <div class="card col-4">
+            <ul class="list-group list-group-flush">
+                @foreach (var item in Model.LeaveAllocations)
+                {
+                    <li class="list-group-item col-12">
+                        <h6>
+                            @item.LeaveType.Name <span class="badge badge-secondary" title="Number of Days">@item.NumberOfDays</span>
+                            <a class="btn btn-sm btn-warning float-right" title="Edit" asp-controller="LeaveAllocation" asp-action="Edit" asp-route-id="@item.Id">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </h6>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to List</a>
+</div>
