@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "My Leave";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLTE.cshtml";
 }
 
 <h1>My Leave Allocation</h1>
@@ -26,7 +26,7 @@
 <hr />
 
 <h1>My Leave Records</h1>
-<table id="tblData" class="table table-hover table-striped" width="100%">
+<table id="tblData" class="table table-hover table-striped dataTable" role="grid" width="100%">
     <thead>
         <tr>
             <th>
@@ -85,9 +85,9 @@
                 <td>
                     @if (item.StartDate > DateTime.Now || item.Approved == null)
                     {
-                    <a class="btn btn-sm btn-danger" asp-action="CancelRequest" asp-route-id="@item.Id" title="Delete" onclick="return confirm('Are you sure you want to cancel this request?')">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </a>
+                        <a class="btn btn-sm btn-danger" asp-action="CancelRequest" asp-route-id="@item.Id" title="Delete" onclick="return confirm('Are you sure you want to cancel this request?')">
+                            <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                        </a>
                     }
                 </td>
             </tr>

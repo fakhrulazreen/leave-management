@@ -7,9 +7,13 @@
 <h1>Leave Type</h1>
 <hr/>
 <p>
-    <a asp-action="Create" class="btn btn-success" title="Create New"><i class="fa fa-plus" aria-hidden="true"></i> Create New</a>
+    <a asp-action="Create" class="btn btn-success" title="Create New">
+        <i class="fas fa-plus" aria-hidden="true"></i>
+        Create New
+    </a>
 </p>
-<table id="tblData" class="table table-hover table-striped" width="100%">
+<br />
+<table id="tblData" class="table table-hover table-striped dataTable" role="grid" width="100%">
     <thead>
         <tr>
             <th>
@@ -31,9 +35,15 @@
                 @Html.DisplayFor(modelItem => item.DefaultDays)
             </td>
             <td>
-                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@item.Id" title="Detail"><i class="fa fa-info" aria-hidden="true"></i></a>
-                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete" onclick="return confirm('Are you sure you want to delete this record?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.Id" title="Edit">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@item.Id" title="Detail">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete" onclick="return confirm('Are you sure you want to delete this record?')">
+                    <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                </a>
             </td>
         </tr>
 }

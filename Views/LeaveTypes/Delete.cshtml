@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLTE.cshtml";
 }
 
 <h1>Delete</h1>
@@ -27,7 +27,10 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger btn-block" /> |
-        <a asp-action="Index"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger btn-block" />
+        <a asp-action="Index">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Back to List
+        </a>
     </form>
 </div>

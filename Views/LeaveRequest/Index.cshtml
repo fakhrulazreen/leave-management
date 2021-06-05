@@ -1,55 +1,75 @@
 ﻿@model AdminLeaveRequestViewVM
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Leave Request";
+    Layout = "~/Views/Shared/_AdminLTE.cshtml";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1>Leave Request</h1>
 
 <div class="row">
-    <div class="col-sm-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <h3 class="card-title">@Model.TotalRequests</h3>
-                <p class="card-text">@Html.DisplayNameFor(model => model.TotalRequests)</p>
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@Model.TotalRequests</h3>
+
+                <p>@Html.DisplayNameFor(model => model.TotalRequests)</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-chart-bar"></i>
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <h3 class="card-title text-warning">@Model.PendingRequests</h3>
-                <p class="card-text">@Html.DisplayNameFor(model => model.PendingRequests)</p>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@Model.PendingRequests</h3>
+
+                <p>@Html.DisplayNameFor(model => model.PendingRequests)</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-clock"></i>
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <h3 class="card-title text-success">@Model.ApprovedRequests</h3>
-                <p class="card-text">@Html.DisplayNameFor(model => model.ApprovedRequests)</p>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.ApprovedRequests</h3>
+
+                <p>@Html.DisplayNameFor(model => model.ApprovedRequests)</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-check"></i>
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
-        <div class="card">
-            <div class="card-body text-center">
-                <h3 class="card-title text-danger">@Model.RejectedRequests</h3>
-                <p class="card-text">@Html.DisplayNameFor(model => model.RejectedRequests)</p>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@Model.RejectedRequests</h3>
+
+                <p>@Html.DisplayNameFor(model => model.RejectedRequests)</p>
+            </div>
+            <div class="icon">
+                <i class="fas fa-times"></i>
             </div>
         </div>
     </div>
+    <!-- ./col -->
 </div>
 <br/>
 <br />
 <hr/>
 <h2>List Request</h2>
-<table id="tblData" class="table table-hover table-striped" width="100%">
+<table id="tblData" class="table table-hover table-striped dataTable" role="grid" width="100%">
     <thead>
         <tr>
             <th>
@@ -76,42 +96,42 @@
     <tbody>
         @foreach (var item in Model.LeaveRequest)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RequestingEmployee.FirstName) @Html.DisplayFor(modelItem => item.RequestingEmployee.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LeaveType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateRequested)
-            </td>
-            <td>
-                @if (item.Approved == true)
-                {
-                    <span class="badge badge-success">Approved</span>
-                }
-                else if (item.Approved == false)
-                {
-                    <span class="badge badge-danger">Rejected</span>
-                }
-                else
-                {
-                    <span class="badge badge-warning">Pending</span>
-                }
-            </td>
-            <td>
-                <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@item.Id" title="Review Leave">
-                    <i class="fa fa-info" aria-hidden="true"></i>
-                </a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestingEmployee.FirstName) @Html.DisplayFor(modelItem => item.RequestingEmployee.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRequested)
+                </td>
+                <td>
+                    @if (item.Approved == true)
+                    {
+                        <span class="badge badge-success">Approved</span>
+                    }
+                    else if (item.Approved == false)
+                    {
+                        <span class="badge badge-danger">Rejected</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">Pending</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-action="Details" asp-route-id="@item.Id" title="Review Leave">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
