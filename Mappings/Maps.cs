@@ -14,7 +14,7 @@ namespace leave_management.Mappings
         {
             CreateMap<LeaveType, LeaveTypeVM>().ReverseMap(); //reversemap() either direction should be map
             //CreateMap<LeaveType, CreateLeaveTypeVM>().ReverseMap(); // map each class in view model
-            CreateMap<LeaveHistory, LeaveHistoryVM>().ReverseMap();
+            CreateMap<LeaveRequest, LeaveRequestVM>().ReverseMap();
             CreateMap<LeaveAllocation, LeaveAllocationVM>().ReverseMap();
             CreateMap<LeaveAllocation, EditLeaveAllocationVM>().ReverseMap();
             CreateMap<Employee, EmployeeVM>().ReverseMap();
