@@ -32,10 +32,23 @@ namespace leave_management
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("AzureConnection")));
+                services.AddDatabaseDeveloperPageExceptionFilter();
+            }
+            else
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+                services.AddDatabaseDeveloperPageExceptionFilter();
+            }
+
+            services.BuildServiceProvider().
+                GetService<ApplicationDbContext>().Database.Migrate();
 
             //setup repository
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
