@@ -17,63 +17,61 @@ namespace leave_management.Repository
             _db = db;
         }
 
-        public bool Create(LeaveRequest entity)
+        public async Task<bool> Create(LeaveRequest entity)
         {
-            _db.LeaveRequests.Add(entity);
-            return Save();
+            await _db.LeaveRequests.AddAsync(entity);
+            return await Save();
         }
 
-        public bool Delete(LeaveRequest entity)
+        public async Task<bool> Delete(LeaveRequest entity)
         {
             _db.LeaveRequests.Remove(entity);
-            return Save();
+            return await Save();
         }
 
-        public ICollection<LeaveRequest> FindAll()
+        public async Task<ICollection<LeaveRequest>> FindAll()
         {
-            var leaveRequests = _db.LeaveRequests
+            var leaveRequests = await _db.LeaveRequests
                 .Include(q => q.RequestingEmployee) // join employee
                 .Include(q => q.ApprovedBy) // join employee
                 .Include(q => q.LeaveType) // join leave type
-                .ToList();
+                .ToListAsync();
             return leaveRequests;
         }
 
-        public LeaveRequest FindById(int id)
+        public async Task<LeaveRequest> FindById(int id)
         {
-            var leaveRequest = _db.LeaveRequests
+            var leaveRequest = await _db.LeaveRequests
                 .Include(q => q.RequestingEmployee) // join employee
                 .Include(q => q.ApprovedBy) // join employee
                 .Include(q => q.LeaveType) // join leave type
-                .FirstOrDefault(q => q.Id == id); //get first row or null record
+                .FirstOrDefaultAsync(q => q.Id == id); //get first row or null record
             return leaveRequest;
         }
 
-        public ICollection<LeaveRequest> GetLeaveRequestByEmployee(string employeeId)
+        public async Task<ICollection<LeaveRequest>> GetLeaveRequestByEmployee(string employeeId)
         {
-            var leaveRequests = FindAll()
-                .Where(q => q.RequestingEmployeeId == employeeId)
+            var leaveRequests = await FindAll();
+            return leaveRequests.Where(q => q.RequestingEmployeeId == employeeId)
                 .ToList();
-            return leaveRequests;
         }
 
-        public bool isExists(int id)
+        public async Task<bool> isExists(int id)
         {
-            var exists = _db.LeaveRequests.Any(q => q.Id == id); // any() check if empty record is empty or not
+            var exists = await _db.LeaveRequests.AnyAsync(q => q.Id == id); // any() check if empty record is empty or not
             return exists;
         }
 
-        public bool Save()
+        public async Task<bool> Save()
         {
-            var changes = _db.SaveChanges();
+            var changes = await _db.SaveChangesAsync();
             return changes > 0; //bcs anything update/delete/add will have one or more record, if less than one then error on the operation
         }
 
-        public bool Update(LeaveRequest entity)
+        public async Task<bool> Update(LeaveRequest entity)
         {
             _db.LeaveRequests.Update(entity);
-
-            return Save();
+            return await Save();
         }
     }
 }
